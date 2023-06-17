@@ -1,0 +1,656 @@
+##########################
+
+2016-se-01
+
+p1 < q2
+
+q2 < p3
+
+semaphore s,t;
+
+s.init(0);
+t.init(0);
+
+P		Q
+p1      	q1
+
+s.signal()  	s.wait()
+p2      	q2
+
+t.wait()        t.signal()
+p3      	q3
+
+##########################
+
+#2017-se-01
+
+p1<q2
+p1<r2
+semaphore s,t;
+s.init(0);
+t.init(0);
+
+
+
+P			Q			R
+
+p1			q1			r1
+s.signal()		s.wait()		s.wait()
+s.signal()
+p2			q2			r2
+
+
+p3			q3			r3
+
+#############################
+
+2017-se-04
+
+p1<q2
+q1<p2
+
+semaphore s,t;
+s.init(0);
+t.init(0);
+
+
+P				Q
+
+p1				q1
+
+s.signal()			t.signal()
+t.wait()			s.wait()
+
+p2				q2
+
+
+#############################
+
+2017-se-05
+
+p1<q1
+q1<p2
+p2<q2
+q2<p3
+p3<q3
+
+semaphore s,t,e,p,r;
+
+s.init(0);
+t.init(0);
+e.init(0);
+p.init(0);
+r.init(0);
+
+
+P				Q
+				
+				s.wait()
+p1				q1
+s.signal()
+t.wait()			t.signal()
+				e.wait()
+p2				q2
+e.signal()			p.signal()
+p.wait()			r.wait()
+p3				q3
+r.signal()
+
+
+second try on this problem
+
+				s1.wait()
+p1				q1
+				s2.signal()
+s1.signal()			s1.wait()
+s2.wait()
+p2				q2
+s1.signal()
+s2.wait()			s2.signal()
+				s1.wait()
+
+p3				q3
+s1.signal()
+
+
+#############################################
+
+2018-cs-01
+p1 < q2,r2
+r2 < p3
+
+semaphore s,t;
+
+s.init(0);
+t.init(0);
+
+
+p1				q1 			r1
+			        
+s.signal()			s.wait()                s.wait()
+				s.signal()		s.signal()
+	
+							t.signal()
+p2				q2			r2
+
+t.wait()							
+p3				q3			r3
+
+####################################################
+
+
+2018-cs-02
+
+p1 < q2
+q1 < r2
+r1 < p2
+
+p2 , q2 < r3
+
+semaphore s,t,r,p;
+s.init(0);
+t.init(0);
+r.init(0);
+p.init(0);
+
+
+p1				q1			r1
+
+			        t.signal() 				
+s.signal()			s.wait()		r.signal()
+ 				   			t.wait()
+r.wait()						
+p2				q2			r2
+
+
+p.signal()			p.signal()     		p.wait()
+							p.wait()
+p3				q3			r3
+
+
+#####################################################
+
+2018-se-01
+
+p2 , q2 < r2
+
+p2 < r2 -> r2 < q2
+q2 < r2 -> r2 < p2
+
+semaphore s,t; 
+s.init(0);
+t.init(1);
+
+
+
+p1			q1			r1
+
+
+						s.wait()
+
+t.wait()		t.wait()
+p2			q2			r2	
+						
+s.signal()  		s.signal()  		t.signal()
+			
+p3			q3			r3
+
+
+################################
+
+2019-cs-01
+
+p1<q2,r2
+q2,r2 < p3
+
+semaphore s;
+
+s.init(0); 
+
+
+p1			q1		r1
+
+			s.wait()	s.wait()
+s.signal()
+			s.signal()	s.signal()
+p2			q2		r2
+
+  			e.signal()	e.signal()		
+	
+e.wait()
+e.wait()		
+
+p3			q3		r3
+
+############################################
+
+2019-cs-02
+
+p1<q1<r1<p2<q2<r2
+
+semaphore s,e,p,f,r;
+s.init(0);
+e.init(0);
+p.init(0);
+f.init(0);
+r.init(0);
+
+
+		s.wait()	e.wait()
+p1		q1		r1
+
+s.signal()	e.signal()	p.signal()
+
+p.wait()	f.wait()	r.wait()
+p2		q2		r2
+
+f.signal()	r.signal()
+			
+
+
+second try
+
+semaphore a,b,c;
+a.init(0);
+b.init(0);
+c.init(0);
+
+		a.wait()	b.wait()
+
+p1		q1		r1
+
+a.signal()	b.signal()	c.signal()
+
+c.wait()	a.wait()	b.wait()
+
+p2		q2		r2
+
+a.signal()	b.signal()
+
+
+
+
+##########################################
+
+2019-se-01
+
+1)p1<q2
+2)q2<p3
+3)q1<p2
+4)p2<q3
+
+semaphore s,t;
+s.init(0);
+t.init(0);
+
+		
+p1			q1
+
+s.signal()		t.signal();		
+t.wait()		s.wait()
+
+p2			q2
+
+s.signal()		t.signal()
+t.wait()		s.wait()
+
+p3			q3
+
+
+
+
+##################################
+
+2020-cs-01
+
+semaphore s,t,e;
+
+s.init(0);
+t.init(0);
+e.init(0);
+
+
+p1 < q2,r2
+
+q1 < p2,r2
+
+r1 < p2,q2
+
+p1		q1		r1
+
+s.signal()	t.signal()	e.signal()
+	
+		s.wait()	s.wait()
+		s.signal()	s.signal()
+
+t.wait()			t.wait()
+t.sigal()			t.signal()
+	
+
+				
+e.wait()	e.wait()
+e.signal()	e.signal()
+p2		q2		r2
+
+
+
+#######################################
+
+2020-se-03
+
+p1 < q2,r2
+
+if ) q2 < r2 -> q3 < r2
+
+if ) r2 < q2 -> r3 < q2
+
+semaphore s,m;
+s.init(0);
+m.init(1);
+
+
+p1			q1		r1
+s.signal()
+
+			s.wait()	s.wait()
+#			s.signal()	s.signal()
+			m.wait()	m.wait()	
+p2			q2		r2
+
+
+
+p3			q3		r3
+			m.signal()	m.signal()
+
+
+another try
+
+
+sem s(0)
+
+P		Q		R
+
+p1		q1		r1
+s.signal()     s.wiat()        s.wait()
+       
+p2		q2		r2
+
+
+p3		q3		r3
+		s.signal()      s.signal()
+
+#############################
+
+
+2017-se-03
+
+semaphore mutex;
+
+mutex.init(1);
+
+p1
+
+mutex.wait()
+
+p2
+
+mutex.signal()
+p3
+
+#############################
+
+2017-se-08
+
+semaphore s,t;
+s.init(1);
+t.init(0);
+
+s.wait()		t.wait()
+p1			q1
+
+p2			q2
+t.signal()		s.signal()
+
+##############################
+2018-se-03
+p1<q2<p3<....
+
+semaphore s,e,t;
+
+s.init(1);
+e.init(0);
+t.init(0);
+
+
+s.wait()		
+p1			q1
+
+e.signal()		e.wait()
+p2			q2
+
+t.wait()		t.signal()
+p3			q3
+s.signal()
+
+
+
+
+
+
+################################
+
+
+2020-cs-01
+P->Q->R->P->....
+
+semaphore s,e,t;
+s.init(1);
+e.init(0)
+t.init(0);
+
+s.wait()	e.wait()	t.wait()
+p1		q1		r1
+
+p2		q2		r2
+e.signal()	t.signal()	s.signal()
+
+################################
+
+2020-se-02
+
+semaphore s,t;
+s.init(1);
+t.init(0);
+
+s.wait()		s.wait()	t.wait()	t.wait()
+p1			q1		r1		w1
+
+p2			q2		r2		w2
+t.signal()		t.signal() 	s.signal()	s.signal()
+
+################################
+
+2021-se-01
+
+semaphore s,e;
+					s.wait()
+					s.signal()
+					e.wait()
+					e.signal()
+p1			q1		r1
+
+
+p2			q2		r2
+s.signal()		e.signal()	
+
+################################
+
+
+2019-se-01
+semaphore s,m;
+m.init(1);
+s.init(0);
+
+int c = 0;
+
+m.wait()
+p1
+
+c = c + 1;
+if(c == 3){
+	s.signal()
+}
+m.signal()
+s.wait()
+s.signal()
+
+p2
+
+#######################################
+
+2020-se-01
+
+int counterP =  0;
+int counterQ = 	0;
+semaphore s,t;
+s.init(0);
+t.init();
+
+
+p1 					q1
+
+s.signal()				s.wait()
+t.wait()				t.signal()
+t.signal()				s.signal()
+p2					q2
+
+
+p3					q3
+
+
+##########################################
+
+
+2022-cs-01
+
+
+P->Q->Q->P->Q->Q->P->..
+semaphore s , t;
+m.init(1);
+t.init(0);
+
+int counter = 0;
+
+m.wait()					t.wait()
+p1						q1
+
+
+
+p2						q2
+						m.wait()
+t.signal()					counter =  counter + 1;
+						
+						if(counter == 2) {
+							counter = 0;
+							m.signal()
+						}
+						else{
+							t.signal()
+						}
+		
+						m.signal()
+
+
+#######################################
+
+2022-in-01
+
+semaphore m,s,t;
+m.init(1);
+s.init(0);
+t.init(0);
+
+int counter = M; 
+
+D							
+
+while true:
+	
+	m.wait();
+	if(counter == 0) {
+		counter = M;
+		s.signal();	
+		e.wait();
+	}
+ 	counter = counter - 1 ;
+	getVaccineFromTable()
+	administerVaccineToPatient()
+	
+	m.signal()
+
+
+N
+while true:
+        s.wait()
+	e.signal()
+        reloadTableWithVaccines(M)
+
+
+
+########################################
+2022-in-02
+
+P->P->Q->Q->Q->P->P->....
+int counterP = 0;
+int counterQ = 0;
+
+semaphore s,t,e,r;
+s.init(1);
+e.init(0);
+t.init(1);
+r.init(1);
+
+s.wait()					e.wait()
+p1						q1
+
+
+p2						q2
+t.wait()					r.wait()
+counterP = counterP + 1; 			counterQ = counterQ + 1;
+if(counterP == 2){				if(counterQ == 3){
+				 			counterQ = 0;		  
+	counterP = 0;		  			s.signal();
+	e.signal()
+}						}
+else{						else{
+	s.signal()					e.signal()
+						}
+}						r.signal()
+t.signal()
+					
+
+###########################################
+semaphore m,e;
+m.init(1);
+e.init(0);
+int counter = 0;
+
+WHILE  true:
+ 
+   m.wait()
+
+   p1
+
+   counter = counter + 1;
+	
+   if(counter == N) {
+	   counter = 0;
+	   e.signal()
+   }
+   
+   m.signal();
+   e.wait(); 
+   e.signal() 
+   p2
+
+ENDWHILE
